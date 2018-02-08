@@ -1,0 +1,71 @@
+---
+title: "Sotaorvot 1918"
+author: "Ilkka Jokipii"
+date: "8 helmikuuta 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+sotasurmat1918 <- read.csv("sotasurmat1918.csv")
+kaarninen_laanit <- read.csv("orvot_laaneittain_kaarninen.csv", sep = ";")
+```
+
+## Sisällissodan sotaorvot
+
+Sisällissodassa kuoli yhteensä noin 36 000 tuhatta suomalaista. Vaikka sotaan osallistui paljon perheettömiä nuorukaisia, teki sota Suomeen myös huomattavan sotaorpojen ryhmän. 
+
+Ongelmaan havahduttiin jo sodan vielä ollessa käynnissä. Helsingin sanomalehdissä julkaistiin jo 18.4.1918 ilmoitus: "Auttakaa, hätä on hirvittävä". Sen avulla haluttiin saada kansalaispiirit keskustelemaan hädänalaisten lasten auttamisesta. (Kaarninen 2008, s.23)
+
+Valtio alkoi paneutumaan ongelmaan samoihin aikoihin. Sosiaalihallituksen tilasto-osasto sai huhti- ja toukokuun vaihteessa tehtäväkseen selvittää orvoiksi jääneiden lasten määrän. Sosiaalihallitus otti yhteyttä seurakuntiin, joiden täytyi paikallisten viranomaisten kanssa antaa tiedot paikkakuntiensa orvoiksi jääneiden lasten määristä. Sodan jäljiltä tilanne oli hyvin sekasortoinen, ja tilaston laatiminen oli ymmärrettävästi vaikea tehtävä. (Kaarninen 2008, s. 17)
+
+**Kaarnisen teoksessaan esittämä laskelma**
+
+```{r, echo=FALSE}
+
+
+kaarninen_laanit
+
+```
+
+Ylläoleva tilast
+
+
+```{r, echo=FALSE}
+
+sotasurmat_laanit <- aggregate(lasten_lkm ~ kirjatlaani, data = sotasurmat1918, sum)
+names(sotasurmat_laanit)[1] <- "Lääni"
+names(sotasurmat_laanit)[2] <- "Orpoja (SSSP)"
+sotasurmat_laanit
+
+```
+
+## Vertailu
+
+**Tuloksissa on selkeästi eroja:**
+
+Selvyyden vuoksi Sotasurmat-tiedoston orpojen määrästä on poistettu Ahvenanmaa ja kirjoillaololääniltään epäselvät tapaukset
+
+
+```{r pressure, echo=FALSE}
+library(dplyr)
+kaarninen_laanit <- kaarninen_laanit[1:8,]
+kaarninen_laanit_karsittu <- kaarninen_laanit
+kaarninen_laanit_karsittu[4] <- NULL
+kaarninen_laanit_karsittu[2] <- NULL
+sotasurmat_laanit <- sotasurmat_laanit[3:10,]
+yhdiste <- left_join(kaarninen_laanit_karsittu, sotasurmat_laanit, by = "Lääni")
+
+yhdiste[4] <- yhdiste[3] - yhdiste[2]
+names(yhdiste)[4] <- "Erotus"
+yhdiste
+
+```
+
+
+
+
+## Lähteet
+
+Kaarninen, Mervi: Punaorvot 1918. Minerva, Hämeenlinna 2008
+
