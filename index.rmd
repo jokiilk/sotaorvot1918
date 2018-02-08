@@ -11,15 +11,15 @@ sotasurmat1918 <- read.csv("sotasurmat1918.csv")
 kaarninen_laanit <- read.csv("orvot_laaneittain_kaarninen.csv", sep = ";")
 ```
 
-## Sisällissodan sotaorvot
+## SisÃ¤llissodan sotaorvot
 
-Sisällissodassa kuoli yhteensä noin 36 000 tuhatta suomalaista. Vaikka sotaan osallistui paljon perheettömiä nuorukaisia, teki sota Suomeen myös huomattavan sotaorpojen ryhmän. 
+SisÃ¤llissodassa kuoli yhteensÃ¤ noin 36 000 tuhatta suomalaista. Vaikka sotaan osallistui paljon perheettÃ¶miÃ¤ nuorukaisia, teki sota Suomeen myÃ¶s huomattavan sotaorpojen ryhmÃ¤n. 
 
-Ongelmaan havahduttiin jo sodan vielä ollessa käynnissä. Helsingin sanomalehdissä julkaistiin jo 18.4.1918 ilmoitus: "Auttakaa, hätä on hirvittävä". Sen avulla haluttiin saada kansalaispiirit keskustelemaan hädänalaisten lasten auttamisesta. (Kaarninen 2008, s.23)
+Ongelmaan havahduttiin jo sodan vielÃ¤ ollessa kÃ¤ynnissÃ¤. Helsingin sanomalehdissÃ¤ julkaistiin jo 18.4.1918 ilmoitus: "Auttakaa, hÃ¤tÃ¤ on hirvittÃ¤vÃ¤". Sen avulla haluttiin saada kansalaispiirit keskustelemaan hÃ¤dÃ¤nalaisten lasten auttamisesta. (Kaarninen 2008, s.23)
 
-Valtio alkoi paneutumaan ongelmaan samoihin aikoihin. Sosiaalihallituksen tilasto-osasto sai huhti- ja toukokuun vaihteessa tehtäväkseen selvittää orvoiksi jääneiden lasten määrän. Sosiaalihallitus otti yhteyttä seurakuntiin, joiden täytyi paikallisten viranomaisten kanssa antaa tiedot paikkakuntiensa orvoiksi jääneiden lasten määristä. Sodan jäljiltä tilanne oli hyvin sekasortoinen, ja tilaston laatiminen oli ymmärrettävästi vaikea tehtävä. (Kaarninen 2008, s. 17)
+Valtio alkoi paneutumaan ongelmaan samoihin aikoihin. Sosiaalihallituksen tilasto-osasto sai huhti- ja toukokuun vaihteessa tehtÃ¤vÃ¤kseen selvittÃ¤Ã¤ orvoiksi jÃ¤Ã¤neiden lasten mÃ¤Ã¤rÃ¤n. Sosiaalihallitus otti yhteyttÃ¤ seurakuntiin, joiden tÃ¤ytyi paikallisten viranomaisten kanssa antaa tiedot paikkakuntiensa orvoiksi jÃ¤Ã¤neiden lasten mÃ¤Ã¤ristÃ¤. Sodan jÃ¤ljiltÃ¤ tilanne oli hyvin sekasortoinen, ja tilaston laatiminen oli ymmÃ¤rrettÃ¤vÃ¤sti vaikea tehtÃ¤vÃ¤. (Kaarninen 2008, s. 17)
 
-**Kaarnisen teoksessaan esittämä laskelma**
+**Kaarnisen teoksessaan esittÃ¤mÃ¤ laskelma**
 
 ```{r, echo=FALSE}
 
@@ -28,13 +28,13 @@ kaarninen_laanit
 
 ```
 
-Ylläoleva tilast
+YllÃ¤oleva tilast
 
 
 ```{r, echo=FALSE}
 
 sotasurmat_laanit <- aggregate(lasten_lkm ~ kirjatlaani, data = sotasurmat1918, sum)
-names(sotasurmat_laanit)[1] <- "Lääni"
+names(sotasurmat_laanit)[1] <- "LÃ¤Ã¤ni"
 names(sotasurmat_laanit)[2] <- "Orpoja (SSSP)"
 sotasurmat_laanit
 
@@ -42,9 +42,9 @@ sotasurmat_laanit
 
 ## Vertailu
 
-**Tuloksissa on selkeästi eroja:**
+**Tuloksissa on selkeÃ¤sti eroja:**
 
-Selvyyden vuoksi Sotasurmat-tiedoston orpojen määrästä on poistettu Ahvenanmaa ja kirjoillaololääniltään epäselvät tapaukset
+Selvyyden vuoksi Sotasurmat-tiedoston orpojen mÃ¤Ã¤rÃ¤stÃ¤ on poistettu Ahvenanmaa ja kirjoillaololÃ¤Ã¤niltÃ¤Ã¤n epÃ¤selvÃ¤t tapaukset
 
 
 ```{r pressure, echo=FALSE}
@@ -54,7 +54,7 @@ kaarninen_laanit_karsittu <- kaarninen_laanit
 kaarninen_laanit_karsittu[4] <- NULL
 kaarninen_laanit_karsittu[2] <- NULL
 sotasurmat_laanit <- sotasurmat_laanit[3:10,]
-yhdiste <- left_join(kaarninen_laanit_karsittu, sotasurmat_laanit, by = "Lääni")
+yhdiste <- left_join(kaarninen_laanit_karsittu, sotasurmat_laanit, by = "LÃ¤Ã¤ni")
 
 yhdiste[4] <- yhdiste[3] - yhdiste[2]
 names(yhdiste)[4] <- "Erotus"
@@ -65,7 +65,7 @@ yhdiste
 
 
 
-## Lähteet
+## LÃ¤hteet
 
-Kaarninen, Mervi: Punaorvot 1918. Minerva, Hämeenlinna 2008
+Kaarninen, Mervi: Punaorvot 1918. Minerva, HÃ¤meenlinna 2008
 
